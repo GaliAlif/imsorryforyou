@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#17152b" />
+  <title>Untuk Lestasi — Sebuah Permintaan Maaf</title>
+  <style>
+    :root {
+      --bg: #17152b;
+      --panel: #24213d;
+      --panel-2: #302b4d;
+      --pink: #ff8fab;
+      --pink-light: #ffd1dc;
+      --cream: #fff2df;
+      --muted: #c5bfd8;
+      --mint: #a8e6cf;
+      --shadow: #0b0a16;
+      --pixel: "Courier New", monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--cream);
+      font-family: var(--pixel);
+      background:
+        radial-gradient(circle at 15% 15%, #393052 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 25%, #51416a 0 2px, transparent 3px),
+        radial-gradient(circle at 35% 75%, #51416a 0 1px, transparent 2px),
+        linear-gradient(180deg, #1d1a34, var(--bg));
+      background-size: 120px 120px, 170px 170px, 90px 90px, auto;
+      overflow-x: hidden;
+    }
+    button { font: inherit; }
+    .wrap { width: min(720px, 100%); margin: 0 auto; padding: 28px 18px 56px; }
+    .topline { text-align: center; color: var(--pink-light); font-size: 11px; letter-spacing: 2px; line-height: 1.8; }
+    .hero { text-align: center; padding: 34px 0 18px; }
+    h1 {
+      margin: 0;
+      color: var(--pink-light);
+      font-size: clamp(22px, 6vw, 38px);
+      line-height: 1.35;
+      text-shadow: 4px 4px 0 #8c557e;
+    }
+    .subtitle { color: var(--muted); font-size: 12px; line-height: 1.8; margin: 12px auto 0; max-width: 460px; }
+    .pixel-scene { height: 150px; display: grid; place-items: center; position: relative; margin: 14px 0 8px; }
+    .pixel-heart {
+      width: 16px; height: 16px; background: var(--pink);
+      box-shadow:
+        16px 0 var(--pink), 32px 0 var(--pink),
+        -16px 16px var(--pink), 0 16px var(--pink), 16px 16px var(--pink), 32px 16px var(--pink), 48px 16px var(--pink),
+        -16px 32px var(--pink), 0 32px var(--pink), 16px 32px var(--pink), 32px 32px var(--pink), 48px 32px var(--pink),
+        0 48px var(--pink), 16px 48px var(--pink), 32px 48px var(--pink),
+        16px 64px var(--pink);
+      transform: translate(-8px, -26px);
+      filter: drop-shadow(5px 6px 0 #8c557e);
+      animation: float 2.4s ease-in-out infinite;
+    }
+    .spark { position: absolute; color: #ffe29a; font-size: 18px; animation: twinkle 1.8s infinite alternate; }
+    .s1 { left: 22%; top: 20px; } .s2 { right: 22%; top: 42px; animation-delay: .6s; }
+    .s3 { left: 30%; bottom: 12px; animation-delay: 1s; }
+    @keyframes float { 50% { transform: translate(-8px, -34px); } }
+    @keyframes twinkle { to { opacity: .35; transform: scale(.7); } }
+    .card {
+      background: rgba(36, 33, 61, .95);
+      border: 3px solid #51466e;
+      box-shadow: 7px 7px 0 var(--shadow);
+      padding: 22px;
+      margin: 18px 0;
+    }
+    .card h2 { color: var(--pink-light); font-size: 15px; margin: 0 0 14px; line-height: 1.6; }
+    .card p { color: var(--cream); font-size: 13px; line-height: 1.95; margin: 0 0 13px; }
+    .small { color: var(--muted) !important; font-size: 11px !important; }
+    .envelope-area { display: grid; place-items: center; padding: 18px 0 8px; }
+    .envelope {
+      position: relative; width: min(250px, 78vw); height: 158px;
+      border: 0; background: transparent; cursor: pointer; padding: 0;
+      filter: drop-shadow(6px 7px 0 var(--shadow));
+      transition: transform .2s ease;
+    }
+    .envelope:hover { transform: translateY(-4px); }
+    .env-back { position: absolute; inset: 0; background: #d96d91; border: 4px solid #8d496d; }
+    .env-paper {
+      position: absolute; width: 82%; height: 105px; left: 9%; top: 4px;
+      background: var(--cream); color: #62445a; border: 3px solid #b78b9d;
+      display: grid; place-items: center; font-size: 11px; line-height: 1.8;
+      transition: transform .7s ease; z-index: 1;
+    }
+    .env-front {
+      position: absolute; inset: 0; z-index: 2; overflow: hidden;
+      background: #f39ab3; clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+      border-bottom: 4px solid #8d496d;
+    }
+    .env-flap {
+      position: absolute; inset: 0; z-index: 3; background: #ffb4c8;
+      clip-path: polygon(0 0, 100% 0, 50% 62%); transform-origin: top;
+      transition: transform .65s ease;
+    }
+    .seal { position: absolute; z-index: 4; left: 50%; top: 54%; transform: translate(-50%, -50%); color: #fff2df; font-size: 22px; }
+    .envelope.open .env-flap { transform: rotateX(180deg); }
+    .envelope.open .env-paper { transform: translateY(-72px); }
+    .hint { text-align: center; font-size: 11px; color: var(--muted); margin-top: 12px; }
+    .letter { display: none; animation: appear .7s ease both; }
+    .letter.show { display: block; }
+    @keyframes appear { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .letter p { min-height: 1em; }
+    .signature { color: var(--pink-light) !important; margin-top: 22px !important; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .btn {
+      border: 3px solid #a85f83; background: var(--pink); color: #321d35;
+      padding: 12px 14px; font-weight: bold; font-size: 11px; line-height: 1.5;
+      box-shadow: 4px 4px 0 var(--shadow); cursor: pointer; flex: 1 1 190px;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 var(--shadow); }
+    .btn.secondary { background: #a8e6cf; border-color: #5b9c85; }
+    .response { display: none; margin-top: 16px; padding: 14px; border: 2px dashed #a88bb8; color: var(--pink-light); font-size: 12px; line-height: 1.8; }
+    .response.show { display: block; animation: appear .4s ease both; }
+    .footer { text-align: center; color: #8f87a8; font-size: 10px; line-height: 1.8; margin-top: 28px; }
+    .pixel-flower { display: inline-block; color: var(--pink); font-size: 17px; margin: 0 5px; }
+    @media (max-width: 420px) {
+      .wrap { padding: 22px 14px 42px; }
+      .card { padding: 18px 16px; }
+      .card p { font-size: 12px; }
+      .actions { flex-direction: column; }
+      .btn { flex-basis: auto; width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="topline">A SMALL WORLD, JUST FOR YOU <span class="pixel-flower">✿</span></div>
+    <header class="hero">
+      <h1>Untuk Lestasi</h1>
+      <p class="subtitle">Ada sesuatu yang ingin aku sampaikan. Bukan untuk membenarkan diri, tapi untuk mengakui kesalahanku.</p>
+      <div class="pixel-scene" aria-hidden="true">
+        <span class="spark s1">✦</span><span class="spark s2">✧</span><span class="spark s3">✦</span>
+        <div class="pixel-heart"></div>
+      </div>
+    </header>
+
+    <section class="card" aria-labelledby="open-title">
+      <h2 id="open-title">Sebuah surat kecil untukmu</h2>
+      <p class="small">Klik amplopnya kalau kamu sudah siap membaca. Tidak perlu terburu-buru.</p>
+      <div class="envelope-area">
+        <button class="envelope" id="envelope" aria-label="Buka surat untuk Lestasi" aria-expanded="false">
+          <span class="env-back"></span>
+          <span class="env-paper">FOR LESTASI<br>with sincerity ♡</span>
+          <span class="env-front"></span>
+          <span class="env-flap"></span>
+          <span class="seal">♥</span>
+        </button>
+        <div class="hint" id="hint">[ KLIK UNTUK MEMBUKA ]</div>
+      </div>
+    </section>
+
+    <section class="card letter" id="letter" aria-live="polite">
+      <h2>Haii, Sayangkuu Lestasi.</h2>
+      <p>Sayang, aku mau minta maaf karena sikapku yang terlalu friendly dengan cewe lain yang bikin kamu ngerasa ga nyaman.</p>
+      <p>Aku sadar mungkin selama ini aku menganggap sikap ramahku sebagai hal yang biasa, apalagi saat berorganisasi atau berinteraksi dengan banyak orang. Tapi aku kurang peka liat gimana sikap itu bisa terasa buat kamu. Aku terlalu fokus menjelaskan niatku, sampai lupa bahwa perasaanmu juga perlu aku dengerin.</p>
+      <p>Aku tidak mau menjadikan alasan apa pun untuk mengecilkan rasa tidak nyaman yang kamu rasakan. Kamu berhak punya batasan, berhak cerita apa yang mengganggumu, dan berhak untuk merasa dihargai dalam hubungan ini.</p>
+      <p>Aku ga berjanji akan berubah hanya lewat kata-kata manis. Aku pengin buktiin lewat sikap: lebih menjaga batas saat berinteraksi, lebih peka, terbuka sama kamu, dan ga ngulangin hal yang sama setelah tahu itu menyakitimu.</p>
+      <p>Aku juga paham kalau kepercayaan ga bisa diminta begitu aja. Aku harus membangunnya lagi lewat waktu dan tindakan yang konsisten.</p>
+      <p>Aku masih pengin memperjuangkan hubungan kita. Aku ingin memperbaiki apa yang udah aku lakukan dan belajar menjadi pasangan yang lebih baik.</p>
+      <p>Tapi aku ga mau memaksamu untuk langsung memaafkan atau menjawab sekarang. Aku akan menghargai waktu dan perasaanmu. Aku ingin kita bisa diskusi dengan tenang, saling dengerin, dan sepakatin batasan yang bikin kita berdua merasa aman.</p>
+      <p>Terima kasih sudah membaca sampai sini. Maaf udah bikin hatimu tidak tenang dan overthinking.</p>
+      <p class="signature">Dengan tulus dari hati Utamy yang kecil ini,<br>aku yang masih pengin belajar menjaga hubungan ini. ♡</p>
+
+      <div class="actions">
+        <button class="btn" id="readAgain">♡ Aku mau baca lagi</button>
+        <button class="btn secondary" id="talk">Aku bersedia ngobrol</button>
+      </div>
+      <div class="response" id="response" role="status"></div>
+    </section>
+
+    <div class="footer">
+      <span class="pixel-flower">✿</span> Dibuat dengan tulus untuk Lestasi. <span class="pixel-flower">✿</span>
+      <br>Take your time.
+      <br>I love uu.
+    </div>
+  </main>
+
+  <script>
+    const envelope = document.getElementById('envelope');
+    const letter = document.getElementById('letter');
+    const hint = document.getElementById('hint');
+    const response = document.getElementById('response');
+
+    envelope.addEventListener('click', () => {
+      const isOpen = envelope.classList.toggle('open');
+      envelope.setAttribute('aria-expanded', String(isOpen));
+      if (isOpen) {
+        hint.textContent = '[ SURAT TELAH TERBUKA ]';
+        window.setTimeout(() => {
+          letter.classList.add('show');
+          letter.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 450);
+      } else {
+        hint.textContent = '[ KLIK UNTUK MEMBUKA ]';
+        letter.classList.remove('show');
+        response.classList.remove('show');
+      }
+    });
+
+    document.getElementById('readAgain').addEventListener('click', () => {
+      response.textContent = 'Baca pelan-pelan aja yaa. Aku pengin setiap kataku ini beneran bisa kubuktiin lewat tindakan.';
+      response.classList.add('show');
+    });
+
+    document.getElementById('talk').addEventListener('click', () => {
+      response.textContent = 'Kita bisa bicara waktu kamu siap. Aku bakal dengerin tanpa motong dan buru-buru bela diri.';
+      response.classList.add('show');
+    });
+  </script>
+</body>
+</html>
